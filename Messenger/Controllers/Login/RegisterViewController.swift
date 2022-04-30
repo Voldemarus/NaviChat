@@ -49,6 +49,7 @@ class RegisterViewController: UIViewController {
     private let imageView : UIImageView = {
         let imView  = UIImageView()
         imView.image = UIImage(named: "Logo")
+        imView.tintColor = .gray
         imView.contentMode = .scaleAspectFit
         return imView
     }()
@@ -75,7 +76,12 @@ class RegisterViewController: UIViewController {
         scrollView.addSubview(passwordField2)
         scrollView.addSubview(logButton)
         
+        scrollView.isUserInteractionEnabled = true
+        imageView.isUserInteractionEnabled = true
+        
         let gesture = UITapGestureRecognizer(target: self, action: #selector(updateAvatar))
+        gesture.numberOfTapsRequired = 1
+        gesture.numberOfTouchesRequired = 1
         imageView.addGestureRecognizer(gesture)
         
     }
@@ -124,7 +130,7 @@ class RegisterViewController: UIViewController {
     }
     
     @objc private func updateAvatar() {
-        
+        presentPhotoActionSheet()
     }
     
     @objc private func logButtonTapped() {
@@ -169,15 +175,6 @@ class RegisterViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    
-    @objc private func registerTapped() {
-        let rvc = RegisterViewController()
-        rvc.title = Loc("Create New Account")
-        navigationController?.pushViewController(rvc, animated: true)
-        
-        
-    }
-
 }
 
 extension RegisterViewController : UITextFieldDelegate {
@@ -197,3 +194,51 @@ extension RegisterViewController : UITextFieldDelegate {
         return true
     }
 }
+
+extension RegisterViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func presentPhotoActionSheet() {
+        let acts = UIAlertController(title: Loc("Pick Profile photo"), message: Loc("Select picture/photo for your avater"), preferredStyle: .actionSheet)
+        acts.addAction(UIAlertAction(title: Loc("Cancel"), style: .cancel, handler: nil))
+        acts.addAction(UIAlertAction(title: Loc("Take photo"), style: .default, handler: {
+            [weak self] _ in
+            self?.presentCamera()
+        }))
+        acts.addAction(UIAlertAction(title: Loc("Pick photo"), style: .default, handler: {
+            [weak self] _ in
+            self?.presentPhotoPicker()
+        }))
+ 
+        present(acts, animated: true)
+    }
+    
+    func presentCamera() {
+       let vc = UIImagePickerController()
+        vc.delegate = self
+        vc.sourceType = .camera
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+    
+    func presentPhotoPicker() {
+        let vc = UIImagePickerController()
+         vc.delegate = self
+         vc.sourceType = .photoLibrary
+         vc.allowsEditing = true
+         present(vc, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        self.imageView.image = pickedImage
+ 
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+

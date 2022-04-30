@@ -530,6 +530,8 @@
 				DEVELOPMENT_TEAM = UKBNTL7HA9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Messenger/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Access to camera is required to make your avatar";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Acess to photos is required to send and store photos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -560,6 +562,8 @@
 				DEVELOPMENT_TEAM = UKBNTL7HA9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Messenger/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Access to camera is required to make your avatar";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Acess to photos is required to send and store photos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
