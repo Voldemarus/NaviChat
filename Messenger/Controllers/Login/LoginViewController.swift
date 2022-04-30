@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
     }()
     
     private let logButton: UIButton = {
-        let b = UIButton().blueButton()
+        let b = UIButton().blueButton("Log In")
         b.addTarget(self, action: #selector(logButtonTapped), for: .touchUpInside)
         return b
     }()
@@ -45,13 +45,12 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Loc("Log in")
-        view.backgroundColor = .gray
+        view.backgroundColor = .white
         let regButton = UIBarButtonItem(title: Loc("Register"),
                 style: .done,
                 target: self,
                 action: #selector(registerTapped))
-        regButton.tintColor = UIColor.black
-        navigationItem.rightBarButtonItem = regButton
+         navigationItem.rightBarButtonItem = regButton
         
         emailField.delegate = self
         passwordField.delegate = self

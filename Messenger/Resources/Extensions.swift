@@ -59,15 +59,21 @@ extension UITextField {
 
 
 extension UIButton {
-    public func blueButton() -> UIButton {
+    public func blueButton(_ aTitle : String) -> UIButton {
         let b = UIButton()
-        b.setTitle(NSLocalizedString("Log In", comment: ""), for: .normal)
+        b.setTitle(aTitle, for: .normal)
         b.backgroundColor = .link
         b.setTitleColor(.white, for: .normal)
         b.titleLabel?.font = .systemFont(ofSize: 20.0, weight:.bold)
         let l = b.layer
         l.cornerRadius = 12
         l.masksToBounds = true
+        return b
+    }
+    
+    public func greenButton(_ aTitle : String) -> UIButton {
+        let b = UIButton().blueButton(aTitle)
+        b.backgroundColor = .systemGreen
         return b
     }
 }
